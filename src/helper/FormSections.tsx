@@ -1,5 +1,5 @@
-import React from "react"
-import type { FormData } from "./formTypes"
+import React from "react";
+import type { FormData } from "./formTypes";
 import {
   NATIONALITIES,
   COUNTRIES,
@@ -10,27 +10,31 @@ import {
   VESSEL_TYPE_SURVEYING_EXPERIENCE,
   ACCREDITATIONS,
   COURSES_COMPLETED,
-} from "./formConstants"
+} from "./formConstants";
 
 type Props = {
-  formData: FormData
-  loading: boolean
-  showCompanyName: boolean
-  errors: Record<string, string>
+  formData: FormData;
+  loading: boolean;
+  showCompanyName: boolean;
+  errors: Record<string, string>;
 
-  addReference: () => void
-  removeReference: (index: number) => void
-  updateReference: (index: number, field: "name" | "contact", value: string) => void
+  addReference: () => void;
+  removeReference: (index: number) => void;
+  updateReference: (
+    index: number,
+    field: "name" | "contact",
+    value: string,
+  ) => void;
 
-  handleChange: (e: React.ChangeEvent<any>) => void
-  handleSubmit: (e: React.FormEvent) => Promise<void>
+  handleChange: (e: React.ChangeEvent<any>) => void;
+  handleSubmit: (e: React.FormEvent) => Promise<void>;
 
-  handleCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleExperienceChange: (
     qualification: string,
     field: "years" | "months" | "days",
-    value: string
-  ) => void
+    value: string,
+  ) => void;
 
   handleMultiCheckboxChange: (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -40,13 +44,13 @@ type Props = {
       | "surveyingExperience"
       | "vesselTypeSurveyingExperience"
       | "accreditations"
-      | "coursesCompleted"
-  ) => void
+      | "coursesCompleted",
+  ) => void;
 
-  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  setMarketingConsent: (checked: boolean) => void
-  handlePhotoChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
+  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setMarketingConsent: (checked: boolean) => void;
+  handlePhotoChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
 export default function FormSections({
   formData,
@@ -70,90 +74,77 @@ export default function FormSections({
   handlePhotoChange,
 }: Props) {
   // ✅ premium UI tokens (immersive + accessible)
-  const labelBase = "block text-[15px] font-semibold text-slate-900 tracking-[0.01em]"
+  const labelBase =
+    "block text-[15px] font-semibold text-slate-900 tracking-[0.01em]";
 
-const hint = "text-[14px] text-slate-500 mt-1 leading-5"
-const err = "text-[14px] text-red-600 mt-1"
+  const hint = "text-[14px] text-slate-500 mt-1 leading-5";
+  const err = "text-[14px] text-red-600 mt-1";
 
- const inputBase =
-  "w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-[15px] text-slate-900 shadow-sm outline-none transition " +
-  "placeholder:text-slate-400 focus:border-[var(--brand)] focus:ring-4 focus:ring-[var(--brand)]/15 hover:border-slate-400"
+  const inputBase =
+    "w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-[15px] text-slate-900 shadow-sm outline-none transition " +
+    "placeholder:text-slate-400 focus:border-[var(--brand)] focus:ring-4 focus:ring-[var(--brand)]/15 hover:border-slate-400";
 
+  const selectBase =
+    "w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-[15px] text-slate-900 shadow-sm outline-none transition " +
+    "focus:border-[var(--brand)] focus:ring-4 focus:ring-[var(--brand)]/15 hover:border-slate-400";
 
-const selectBase =
-  "w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-[15px] text-slate-900 shadow-sm outline-none transition " +
-  "focus:border-[var(--brand)] focus:ring-4 focus:ring-[var(--brand)]/15 hover:border-slate-400"
+  const smallBox =
+    "rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-[15px] text-slate-900 shadow-sm outline-none w-[76px] text-center transition";
 
-
-
-
-const smallBox =
-  "rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-[15px] text-slate-900 shadow-sm outline-none w-[76px] text-center transition"
-
-const yearBox =
-  "rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-[15px] text-slate-900 shadow-sm outline-none w-[105px] text-center transition"
-
-
-
+  const yearBox =
+    "rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-[15px] text-slate-900 shadow-sm outline-none w-[105px] text-center transition";
 
   // Card feels more “layered” and grouped (Gestalt)
   const sectionCard =
-    "rounded-2xl bg-white/80 backdrop-blur-md p-6 sm:p-7 shadow-[0_8px_30px_-18px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70"
+    "rounded-2xl bg-white/80 backdrop-blur-md p-6 sm:p-7 shadow-[0_8px_30px_-18px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70";
 
-const sectionTitle =
-  "text-[17px] font-bold text-slate-900"
+  const sectionTitle = "text-[17px] font-bold text-slate-900";
 
-// Brand navy (from your reference)
-const brand = "#213A6B" // change if you want slightly different
-
-
+  // Brand navy (from your reference)
+  const brand = "#213A6B"; // change if you want slightly different
 
   // Larger clickable choice tiles (Fitts + Hick)
- const choiceTile =
-  "group flex items-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-[14.5px] text-slate-900 shadow-sm transition hover:border-slate-400"
-
-
-
+  const choiceTile =
+    "group flex items-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-[14.5px] text-slate-900 shadow-sm transition hover:border-slate-400";
 
   const checkboxRadio =
-    "h-2 w-2 rounded border-slate-300 text-slate-900 focus:ring-slate-300"
+    "h-2 w-2 rounded border-slate-300 text-slate-900 focus:ring-slate-300";
   const OtherTextarea = ({
-  show,
-  name,
-  label,
-  placeholder,
-}: {
-  show: boolean
-  name: keyof FormData
-  label: string
-  placeholder: string
-}) => {
-  if (!show) return null
+    show,
+    name,
+    label,
+    placeholder,
+  }: {
+    show: boolean;
+    name: keyof FormData;
+    label: string;
+    placeholder: string;
+  }) => {
+    if (!show) return null;
+
+    return (
+      <div className="mt-4">
+        <label className={labelBase}>{label}</label>
+        <textarea
+          name={name as string}
+          value={(formData as any)[name] || ""}
+          onChange={handleChange}
+          className={`${inputBase} mt-2 min-h-[110px]`}
+          placeholder={placeholder}
+          rows={4}
+        />
+        {errors[String(name)] ? (
+          <p className={err}>{errors[String(name)]}</p>
+        ) : null}
+      </div>
+    );
+  };
 
   return (
-    <div className="mt-4">
-      <label className={labelBase}>{label}</label>
-      <textarea
-        name={name as string}
-        value={(formData as any)[name] || ""}
-        onChange={handleChange}
-        className={`${inputBase} mt-2 min-h-[110px]`}
-        placeholder={placeholder}
-        rows={4}
-      />
-      {errors[String(name)] ? <p className={err}>{errors[String(name)]}</p> : null}
-    </div>
-  )
-}
-
-
-  return (
-   <div
-  className="min-h-screen font-sans bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 flex justify-center items-start py-10 px-4"
-  style={{ ["--brand" as any]: brand }}
->
-
-
+    <div
+      className="min-h-screen font-sans bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 flex justify-center items-start py-10 px-4"
+      style={{ ["--brand" as any]: brand }}
+    >
       <div className="w-full max-w-5xl">
         <div className="relative overflow-hidden rounded-3xl bg-white shadow-[0_18px_60px_-30px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/80">
           {/* subtle top glow */}
@@ -164,9 +155,12 @@ const brand = "#213A6B" // change if you want slightly different
             <div className="mb-8">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h1 className="text-3xl font-bold tracking-tight" style={{ color: "var(--brand)" }}>
-  FATHOM SURVEYOR
-</h1>
+                  <h1
+                    className="text-3xl font-bold tracking-tight"
+                    style={{ color: "var(--brand)" }}
+                  >
+                    FATHOM SURVEYOR
+                  </h1>
 
                   <p className="mt-2 text-[13px] text-slate-600">
                     Application Form • Complete all required fields
@@ -181,20 +175,21 @@ const brand = "#213A6B" // change if you want slightly different
 
               <div className="mt-5 space-y-3 text-[16px] text-slate-700 leading-6">
                 <p>
-                  Thanks for your interest in joining the {""}<b>Fathom Surveyor Network</b>
-                   .We work with experienced marine surveyors 
-                   and follow a careful review process.
+                  Thanks for your interest in joining the {""}
+                  <b>Fathom Surveyor Network</b>
+                  .We work with experienced marine surveyors and follow a
+                  careful review process.
                 </p>
 
                 <p>
-                  Please note that the review process may take up to <b>28 days</b>. We
-                  will contact you directly with the next steps. You do not need to
-                  contact us in the meantime.
+                  Please note that the review process may take up to{" "}
+                  <b>28 days</b>. We will contact you directly with the next
+                  steps. You do not need to contact us in the meantime.
                 </p>
 
                 <p>
-                  After submitting the form, you’ll be redirected back to our website and
-                  will receive an email confirmation.
+                  After submitting the form, you’ll be redirected back to our
+                  website and will receive an email confirmation.
                 </p>
               </div>
             </div>
@@ -206,8 +201,8 @@ const brand = "#213A6B" // change if you want slightly different
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
                   <h2 className={sectionTitle}>Basic details</h2>
                   <p className="text-[14px] leading-6 text-slate-700">
-
-                    Fields marked <span className="text-red-600">*</span> are required
+                    Fields marked <span className="text-red-600">*</span> are
+                    required
                   </p>
                 </div>
 
@@ -223,7 +218,9 @@ const brand = "#213A6B" // change if you want slightly different
                       onChange={handleChange}
                       className={inputBase}
                     />
-                    {errors.firstName ? <p className={err}>{errors.firstName}</p> : null}
+                    {errors.firstName ? (
+                      <p className={err}>{errors.firstName}</p>
+                    ) : null}
                   </div>
 
                   <div>
@@ -237,7 +234,9 @@ const brand = "#213A6B" // change if you want slightly different
                       onChange={handleChange}
                       className={inputBase}
                     />
-                    {errors.lastName ? <p className={err}>{errors.lastName}</p> : null}
+                    {errors.lastName ? (
+                      <p className={err}>{errors.lastName}</p>
+                    ) : null}
                   </div>
 
                   <div>
@@ -297,7 +296,9 @@ const brand = "#213A6B" // change if you want slightly different
                       Do you work for a surveying company?{" "}
                       <span className="text-red-600">*</span>
                     </label>
-                    <p className={hint}>Do not answer if you are self-employed.</p>
+                    <p className={hint}>
+                      Do not answer if you are self-employed.
+                    </p>
 
                     <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {[
@@ -330,7 +331,8 @@ const brand = "#213A6B" // change if you want slightly different
                         Company name <span className="text-red-600">*</span>
                       </label>
                       <p className={hint}>
-                        If you work for, or own, a company please enter the company name.
+                        If you work for, or own, a company please enter the
+                        company name.
                       </p>
                       <input
                         type="text"
@@ -348,8 +350,9 @@ const brand = "#213A6B" // change if you want slightly different
 
                 <div className="mt-6 rounded-2xl bg-gradient-to-br from-amber-50 to-white p-4 ring-1 ring-amber-200/60">
                   <p className="text-[13px] text-amber-900 leading-5">
-                    If you work for a company that is already part of the fathom Surveyor
-                    Network, you must ensure that your email address is unique.
+                    If you work for a company that is already part of the fathom
+                    Surveyor Network, you must ensure that your email address is
+                    unique.
                   </p>
                   <p className="mt-2 text-[13px] font-semibold text-amber-900">
                     Do not enter a generic company email address.
@@ -372,7 +375,6 @@ const brand = "#213A6B" // change if you want slightly different
                 <h2 className={sectionTitle}>Contact & verification</h2>
 
                 <div className="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-9 items-start">
-
                   <div className="lg:col-span-1">
                     <label className={labelBase}>
                       Email <span className="text-red-600">*</span>
@@ -387,7 +389,9 @@ const brand = "#213A6B" // change if you want slightly different
                       onChange={handleChange}
                       className={inputBase}
                     />
-                    {errors.email ? <p className={err}>{errors.email}</p> : null}
+                    {errors.email ? (
+                      <p className={err}>{errors.email}</p>
+                    ) : null}
                   </div>
 
                   <div>
@@ -424,13 +428,21 @@ const brand = "#213A6B" // change if you want slightly different
                       />
                     </div>
 
-                    {errors.dobDD ? <p className={err}>{errors.dobDD}</p> : null}
-                    {errors.dobMM ? <p className={err}>{errors.dobMM}</p> : null}
-                    {errors.dobYYYY ? <p className={err}>{errors.dobYYYY}</p> : null}
+                    {errors.dobDD ? (
+                      <p className={err}>{errors.dobDD}</p>
+                    ) : null}
+                    {errors.dobMM ? (
+                      <p className={err}>{errors.dobMM}</p>
+                    ) : null}
+                    {errors.dobYYYY ? (
+                      <p className={err}>{errors.dobYYYY}</p>
+                    ) : null}
                   </div>
 
                   <div>
-                    <label className={labelBase}>Year started in industry</label>
+                    <label className={labelBase}>
+                      Year started in industry
+                    </label>
                     <p className={hint}>
                       Enter the year you started your maritime career
                     </p>
@@ -489,7 +501,9 @@ const brand = "#213A6B" // change if you want slightly different
                       onChange={handleChange}
                       className={inputBase}
                     />
-                    {errors.street1 ? <p className={err}>{errors.street1}</p> : null}
+                    {errors.street1 ? (
+                      <p className={err}>{errors.street1}</p>
+                    ) : null}
                   </div>
 
                   <div>
@@ -546,7 +560,9 @@ const brand = "#213A6B" // change if you want slightly different
                         </option>
                       ))}
                     </select>
-                    {errors.country ? <p className={err}>{errors.country}</p> : null}
+                    {errors.country ? (
+                      <p className={err}>{errors.country}</p>
+                    ) : null}
                   </div>
 
                   <div>
@@ -570,90 +586,97 @@ const brand = "#213A6B" // change if you want slightly different
               <section className={sectionCard}>
                 <h2 className={sectionTitle}>Accuracy</h2>
                 <p className="mt-3 text-[14px] text-slate-700 leading-6">
-                  The information provided on this form will be used to create your
-                  profile within the fathom Surveyor Network. The information must be
-                  accurate and reflect your experiences and knowledge bases. Any
-                  instance where inaccurate information is submitted will result in
-                  instant cancellation of applications.
+                  The information provided on this form will be used to create
+                  your profile within the fathom Surveyor Network. The
+                  information must be accurate and reflect your experiences and
+                  knowledge bases. Any instance where inaccurate information is
+                  submitted will result in instant cancellation of applications.
                 </p>
               </section>
 
-             
-{/* Discipline + Rank */}
-<section className={sectionCard}>
-  <h2 className={sectionTitle}>Discipline & rank</h2>
+              {/* Discipline + Rank */}
+              <section className={sectionCard}>
+                <h2 className={sectionTitle}>Discipline & rank</h2>
 
-  <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-    {/* Discipline dropdown */}
-    <div>
-      <label className={labelBase}>
-        Discipline <span className="text-red-600">*</span>
-      </label>
-      <p className={hint}>Select your maritime discipline.</p>
+                <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                  {/* Discipline dropdown */}
+                  <div>
+                    <label className={labelBase}>
+                      Discipline <span className="text-red-600">*</span>
+                    </label>
+                    <p className={hint}>Select your maritime discipline.</p>
 
-      <select
-        name="discipline"
-        value={formData.discipline}
-        onChange={handleChange}
-        className={`${selectBase} mt-3`}
-      >
-        <option value="">Please Select</option>
-        <option value="deck">Deck</option>
-        <option value="engine">Engine</option>
-        <option value="naval">Naval Arch</option>
-        <option value="other">Other</option>
-      </select>
+                    <select
+                      name="discipline"
+                      value={formData.discipline}
+                      onChange={handleChange}
+                      className={`${selectBase} mt-3`}
+                    >
+                      <option value="">Please Select</option>
+                      <option value="deck">Deck</option>
+                      <option value="engine">Engine</option>
+                      <option value="naval">Naval Arch</option>
+                      <option value="other">Other</option>
+                    </select>
 
-      {errors.discipline ? <p className={err}>{errors.discipline}</p> : null}
+                    {errors.discipline ? (
+                      <p className={err}>{errors.discipline}</p>
+                    ) : null}
 
-      {/* ✅ Other textarea for Discipline */}
-      <OtherTextarea
-        show={formData.discipline === "other"}
-        name="disciplineOther"
-        label="Other discipline (please specify)"
-        placeholder="Write your discipline..."
-      />
-    </div>
+                    {/* ✅ Other textarea for Discipline */}
+                    <OtherTextarea
+                      show={formData.discipline === "other"}
+                      name="disciplineOther"
+                      label="Other discipline (please specify)"
+                      placeholder="Write your discipline..."
+                    />
+                  </div>
 
-    {/* Rank dropdown */}
-    <div>
-      <label className={labelBase}>
-        Rank <span className="text-red-600">*</span>
-      </label>
-      <p className={hint}>Select the highest rank you sailed at.</p>
+                  {/* Rank dropdown */}
+                  <div>
+                    <label className={labelBase}>
+                      Rank <span className="text-red-600">*</span>
+                    </label>
+                    <p className={hint}>
+                      Select the highest rank you sailed at.
+                    </p>
 
-      <select
-        name="rank"
-        value={formData.rank}
-        onChange={handleChange}
-        className={`${selectBase} mt-3`}
-      >
-        <option value="">Please Select</option>
-        <option value="master_mariner">Master Mariner</option>
-        <option value="tow_master">Tow Master</option>
-        <option value="chief_officer">Chief Officer</option>
-        <option value="second_third_officer">Second/Third Officer</option>
-        <option value="third_fourth_engineer">Third/Fourth Engineer</option>
-        <option value="naval_architect">Naval Architect</option>
-        <option value="yacht_master">Yacht Master</option>
-        <option value="relevant_maritime_degree">Relevant Maritime Degree</option>
-        <option value="other">Other</option>
-      </select>
+                    <select
+                      name="rank"
+                      value={formData.rank}
+                      onChange={handleChange}
+                      className={`${selectBase} mt-3`}
+                    >
+                      <option value="">Please Select</option>
+                      <option value="master_mariner">Master Mariner</option>
+                      <option value="tow_master">Tow Master</option>
+                      <option value="chief_officer">Chief Officer</option>
+                      <option value="second_third_officer">
+                        Second/Third Officer
+                      </option>
+                      <option value="third_fourth_engineer">
+                        Third/Fourth Engineer
+                      </option>
+                      <option value="naval_architect">Naval Architect</option>
+                      <option value="yacht_master">Yacht Master</option>
+                      <option value="relevant_maritime_degree">
+                        Relevant Maritime Degree
+                      </option>
+                      <option value="other">Other</option>
+                    </select>
 
-      {errors.rank ? <p className={err}>{errors.rank}</p> : null}
+                    {errors.rank ? <p className={err}>{errors.rank}</p> : null}
 
-      {/* ✅ Other textarea for Rank */}
-      <OtherTextarea
-        show={formData.rank === "other"}
-        name="rankOther"
-        label="Other rank (please specify)"
-        placeholder="Write your rank..."
-      />
-    </div>
-  </div>
-</section>
-
-
+                    {/* ✅ Other textarea for Rank */}
+                    <OtherTextarea
+                      show={formData.rank === "other"}
+                      name="rankOther"
+                      label="Other rank (please specify)"
+                      placeholder="Write your rank..."
+                    />
+                  </div>
+                </div>
+              </section>
 
               {/* Qualifications + Experience */}
               <section className={sectionCard}>
@@ -687,12 +710,11 @@ const brand = "#213A6B" // change if you want slightly different
                       <p className={err}>{errors.qualifications}</p>
                     ) : null}
                     <OtherTextarea
-  show={formData.qualifications.includes("Other")}
-  name={"qualificationsOther"}
-  label="Other qualification (please specify)"
-  placeholder="Write your qualification..."
-/>
-
+                      show={formData.qualifications.includes("Other")}
+                      name={"qualificationsOther"}
+                      label="Other qualification (please specify)"
+                      placeholder="Write your qualification..."
+                    />
                   </div>
 
                   {/* RIGHT */}
@@ -711,7 +733,7 @@ const brand = "#213A6B" // change if you want slightly different
                             years: "",
                             months: "",
                             days: "",
-                          }
+                          };
 
                           return (
                             <div
@@ -726,7 +748,11 @@ const brand = "#213A6B" // change if you want slightly different
                                 <input
                                   value={exp.years}
                                   onChange={(e) =>
-                                    handleExperienceChange(q, "years", e.target.value)
+                                    handleExperienceChange(
+                                      q,
+                                      "years",
+                                      e.target.value,
+                                    )
                                   }
                                   placeholder="Years"
                                   className={inputBase}
@@ -734,7 +760,11 @@ const brand = "#213A6B" // change if you want slightly different
                                 <input
                                   value={exp.months}
                                   onChange={(e) =>
-                                    handleExperienceChange(q, "months", e.target.value)
+                                    handleExperienceChange(
+                                      q,
+                                      "months",
+                                      e.target.value,
+                                    )
                                   }
                                   placeholder="Months"
                                   className={inputBase}
@@ -742,7 +772,11 @@ const brand = "#213A6B" // change if you want slightly different
                                 <input
                                   value={exp.days}
                                   onChange={(e) =>
-                                    handleExperienceChange(q, "days", e.target.value)
+                                    handleExperienceChange(
+                                      q,
+                                      "days",
+                                      e.target.value,
+                                    )
                                   }
                                   placeholder="Days"
                                   className={inputBase}
@@ -753,7 +787,7 @@ const brand = "#213A6B" // change if you want slightly different
                                 <p className={err}>{errors[`exp_${q}`]}</p>
                               ) : null}
                             </div>
-                          )
+                          );
                         })}
                       </div>
                     ) : (
@@ -786,7 +820,9 @@ const brand = "#213A6B" // change if you want slightly different
                             type="checkbox"
                             value={item}
                             checked={formData.vesselTypes.includes(item)}
-                            onChange={(e) => handleMultiCheckboxChange(e, "vesselTypes")}
+                            onChange={(e) =>
+                              handleMultiCheckboxChange(e, "vesselTypes")
+                            }
                             className={checkboxRadio}
                           />
                           {item}
@@ -794,14 +830,15 @@ const brand = "#213A6B" // change if you want slightly different
                       ))}
                     </div>
 
-                    {errors.vesselTypes ? <p className={err}>{errors.vesselTypes}</p> : null}
+                    {errors.vesselTypes ? (
+                      <p className={err}>{errors.vesselTypes}</p>
+                    ) : null}
                     <OtherTextarea
-  show={formData.vesselTypes.includes("Other")}
-  name={"vesselTypesOther"}
-  label="Other vessel type (please specify)"
-  placeholder="Write vessel type(s)..."
-/>
-
+                      show={formData.vesselTypes.includes("Other")}
+                      name={"vesselTypesOther"}
+                      label="Other vessel type (please specify)"
+                      placeholder="Write vessel type(s)..."
+                    />
                   </div>
 
                   <div>
@@ -813,9 +850,14 @@ const brand = "#213A6B" // change if you want slightly different
                           <input
                             type="checkbox"
                             value={item}
-                            checked={formData.shoresideExperience.includes(item)}
+                            checked={formData.shoresideExperience.includes(
+                              item,
+                            )}
                             onChange={(e) =>
-                              handleMultiCheckboxChange(e, "shoresideExperience")
+                              handleMultiCheckboxChange(
+                                e,
+                                "shoresideExperience",
+                              )
                             }
                             className={checkboxRadio}
                           />
@@ -824,12 +866,11 @@ const brand = "#213A6B" // change if you want slightly different
                       ))}
                     </div>
                     <OtherTextarea
-  show={formData.shoresideExperience.includes("Other")}
-  name={"shoresideExperienceOther"}
-  label="Other shoreside experience (please specify)"
-  placeholder="Write shoreside experience..."
-/>
-
+                      show={formData.shoresideExperience.includes("Other")}
+                      name={"shoresideExperienceOther"}
+                      label="Other shoreside experience (please specify)"
+                      placeholder="Write shoreside experience..."
+                    />
                   </div>
                 </div>
               </section>
@@ -851,9 +892,14 @@ const brand = "#213A6B" // change if you want slightly different
                           <input
                             type="checkbox"
                             value={item}
-                            checked={formData.surveyingExperience.includes(item)}
+                            checked={formData.surveyingExperience.includes(
+                              item,
+                            )}
                             onChange={(e) =>
-                              handleMultiCheckboxChange(e, "surveyingExperience")
+                              handleMultiCheckboxChange(
+                                e,
+                                "surveyingExperience",
+                              )
                             }
                             className={checkboxRadio}
                           />
@@ -862,17 +908,20 @@ const brand = "#213A6B" // change if you want slightly different
                       ))}
                     </div>
                     <OtherTextarea
-  show={formData.surveyingExperience.includes("Other")}
-  name={"surveyingExperienceOther"}
-  label="Other surveying experience (please specify)"
-  placeholder="Write surveying experience..."
-/>
-
+                      show={formData.surveyingExperience.includes("Other")}
+                      name={"surveyingExperienceOther"}
+                      label="Other surveying experience (please specify)"
+                      placeholder="Write surveying experience..."
+                    />
                   </div>
 
                   <div>
-                    <label className={labelBase}>Vessel Type Surveying Experience</label>
-                    <p className={hint}>Select vessel types you have completed surveys on.</p>
+                    <label className={labelBase}>
+                      Vessel Type Surveying Experience
+                    </label>
+                    <p className={hint}>
+                      Select vessel types you have completed surveys on.
+                    </p>
 
                     <div className="mt-3 space-y-3">
                       {VESSEL_TYPE_SURVEYING_EXPERIENCE.map((item) => (
@@ -880,9 +929,14 @@ const brand = "#213A6B" // change if you want slightly different
                           <input
                             type="checkbox"
                             value={item}
-                            checked={formData.vesselTypeSurveyingExperience.includes(item)}
+                            checked={formData.vesselTypeSurveyingExperience.includes(
+                              item,
+                            )}
                             onChange={(e) =>
-                              handleMultiCheckboxChange(e, "vesselTypeSurveyingExperience")
+                              handleMultiCheckboxChange(
+                                e,
+                                "vesselTypeSurveyingExperience",
+                              )
                             }
                             className={checkboxRadio}
                           />
@@ -891,12 +945,13 @@ const brand = "#213A6B" // change if you want slightly different
                       ))}
                     </div>
                     <OtherTextarea
-  show={formData.vesselTypeSurveyingExperience.includes("Other")}
-  name={"vesselTypeSurveyingExperienceOther"}
-  label="Other vessel type surveying experience (please specify)"
-  placeholder="Write vessel types you surveyed..."
-/>
-
+                      show={formData.vesselTypeSurveyingExperience.includes(
+                        "Other",
+                      )}
+                      name={"vesselTypeSurveyingExperienceOther"}
+                      label="Other vessel type surveying experience (please specify)"
+                      placeholder="Write vessel types you surveyed..."
+                    />
                   </div>
                 </div>
               </section>
@@ -909,7 +964,8 @@ const brand = "#213A6B" // change if you want slightly different
                   <div>
                     <label className={labelBase}>Accreditation</label>
                     <p className={hint}>
-                      Select any organisation that has professionally accredited you.
+                      Select any organisation that has professionally accredited
+                      you.
                     </p>
 
                     <div className="mt-3 space-y-3">
@@ -929,12 +985,11 @@ const brand = "#213A6B" // change if you want slightly different
                       ))}
                     </div>
                     <OtherTextarea
-  show={formData.accreditations.includes("Other")}
-  name={"accreditationsOther"}
-  label="Other accreditation (please specify)"
-  placeholder="Write your accreditation..."
-/>
-
+                      show={formData.accreditations.includes("Other")}
+                      name={"accreditationsOther"}
+                      label="Other accreditation (please specify)"
+                      placeholder="Write your accreditation..."
+                    />
                   </div>
 
                   <div>
@@ -960,12 +1015,11 @@ const brand = "#213A6B" // change if you want slightly different
                       ))}
                     </div>
                     <OtherTextarea
-  show={formData.coursesCompleted.includes("Other")}
-  name={"coursesCompletedOther"}
-  label="Other course (please specify)"
-  placeholder="Write the course name..."
-/>
-
+                      show={formData.coursesCompleted.includes("Other")}
+                      name={"coursesCompletedOther"}
+                      label="Other course (please specify)"
+                      placeholder="Write the course name..."
+                    />
                   </div>
                 </div>
               </section>
@@ -986,7 +1040,9 @@ const brand = "#213A6B" // change if you want slightly different
                   </button>
                 </div>
 
-                <p className={hint}>At least 2 references are required. Add more if you’d like.</p>
+                <p className={hint}>
+                  At least 2 references are required. Add more if you’d like.
+                </p>
 
                 <div className="mt-4 space-y-4">
                   {formData.references.map((ref, idx) => (
@@ -1021,7 +1077,9 @@ const brand = "#213A6B" // change if you want slightly different
                           <input
                             type="text"
                             value={ref.name}
-                            onChange={(e) => updateReference(idx, "name", e.target.value)}
+                            onChange={(e) =>
+                              updateReference(idx, "name", e.target.value)
+                            }
                             className={inputBase}
                           />
                           {errors[`ref_${idx}_name`] ? (
@@ -1034,11 +1092,15 @@ const brand = "#213A6B" // change if you want slightly different
                           <input
                             type="text"
                             value={ref.contact}
-                            onChange={(e) => updateReference(idx, "contact", e.target.value)}
+                            onChange={(e) =>
+                              updateReference(idx, "contact", e.target.value)
+                            }
                             className={inputBase}
                           />
                           {errors[`ref_${idx}_contact`] ? (
-                            <p className={err}>{errors[`ref_${idx}_contact`]}</p>
+                            <p className={err}>
+                              {errors[`ref_${idx}_contact`]}
+                            </p>
                           ) : null}
                         </div>
                       </div>
@@ -1058,7 +1120,9 @@ const brand = "#213A6B" // change if you want slightly different
                       <label className={labelBase}>
                         Profile Photo <span className="text-red-600">*</span>
                       </label>
-                      <p className={hint}>Upload a clear photo (JPG/PNG). Max size: 5MB.</p>
+                      <p className={hint}>
+                        Upload a clear photo (JPG/PNG). Max size: 5MB.
+                      </p>
 
                       <div className="mt-3 flex items-center gap-3">
                         <label className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2.5 text-[13px] font-semibold text-white cursor-pointer shadow-sm transition hover:bg-slate-800 focus-within:ring-4 focus-within:ring-slate-200/60">
@@ -1072,11 +1136,15 @@ const brand = "#213A6B" // change if you want slightly different
                         </label>
 
                         <span className="text-[13px] text-slate-700 truncate">
-                          {formData.photoFile ? formData.photoFile.name : "No file chosen"}
+                          {formData.photoFile
+                            ? formData.photoFile.name
+                            : "No file chosen"}
                         </span>
                       </div>
 
-                      {errors.photoFile ? <p className={err}>{errors.photoFile}</p> : null}
+                      {errors.photoFile ? (
+                        <p className={err}>{errors.photoFile}</p>
+                      ) : null}
                     </div>
 
                     <div>
@@ -1084,8 +1152,9 @@ const brand = "#213A6B" // change if you want slightly different
                         Original CV File <span className="text-red-600">*</span>
                       </label>
                       <p className={hint}>
-                        Share a copy of your CV in PDF or DOC format. Your CV should include
-                        seagoing experience (including vessel types), shoreside experience and education.
+                        Share a copy of your CV in PDF or DOC format. Your CV
+                        should include seagoing experience (including vessel
+                        types), shoreside experience and education.
                       </p>
 
                       <div className="mt-3 flex items-center gap-3">
@@ -1100,11 +1169,15 @@ const brand = "#213A6B" // change if you want slightly different
                         </label>
 
                         <span className="text-[13px] text-slate-700 truncate">
-                          {formData.cvFile ? formData.cvFile.name : "No file chosen"}
+                          {formData.cvFile
+                            ? formData.cvFile.name
+                            : "No file chosen"}
                         </span>
                       </div>
 
-                      {errors.cvFile ? <p className={err}>{errors.cvFile}</p> : null}
+                      {errors.cvFile ? (
+                        <p className={err}>{errors.cvFile}</p>
+                      ) : null}
                     </div>
                   </div>
 
@@ -1114,23 +1187,23 @@ const brand = "#213A6B" // change if you want slightly different
                       Inspection Cost <span className="text-red-600">*</span>
                     </label>
                     <p className={hint}>
-                      Provide your inspection fee expectations (USD) to conduct a condition inspection
-                      within 250km of your home address.
+                      Provide your inspection fee expectations (USD) to conduct
+                      a condition inspection within 250km of your home address.
                     </p>
 
                     <p className={`${hint} mt-2`}>
-                      <span className="font-semibold">Please note:</span> This fee is non-binding.
-                      You will be given the opportunity to bid for inspections once registered.
+                      <span className="font-semibold">Please note:</span> This
+                      fee is non-binding. You will be given the opportunity to
+                      bid for inspections once registered.
                     </p>
 
                     <textarea
-  name="inspectionCost"
-  value={formData.inspectionCost}
-  onChange={handleChange}
-  className={`${inputBase} mt-3 min-h-[120px]`}
-  rows={5}
-/>
-
+                      name="inspectionCost"
+                      value={formData.inspectionCost}
+                      onChange={handleChange}
+                      className={`${inputBase} mt-3 min-h-[120px]`}
+                      rows={5}
+                    />
 
                     {errors.inspectionCost ? (
                       <p className={err}>{errors.inspectionCost}</p>
@@ -1145,9 +1218,10 @@ const brand = "#213A6B" // change if you want slightly different
 
                 <div className="mt-3 space-y-3 text-[14px] text-slate-700 leading-6">
                   <p>
-                    Fathom is committed to protecting and respecting your privacy, and we’ll only use
-                    your personal information to administer your account and to provide the products
-                    and services you requested.
+                    Fathom is committed to protecting and respecting your
+                    privacy, and we’ll only use your personal information to
+                    administer your account and to provide the products and
+                    services you requested.
                   </p>
 
                   <label className="flex items-start gap-3 rounded-2xl bg-white/70 ring-1 ring-slate-200/70 p-5 shadow-sm">
@@ -1155,24 +1229,24 @@ const brand = "#213A6B" // change if you want slightly different
                       type="checkbox"
                       checked={formData.marketingConsent}
                       onChange={(e) => setMarketingConsent(e.target.checked)}
-                      className={`${checkboxRadio} mt-1`}
+                      className={`${checkboxRadio} mt-[3px] h-5 w-5 shrink-0`}
                     />
-                    <span>
+
+                    <span className="text-[15px] leading-6 text-slate-700">
                       I agree to receive other communications from Fathom.
                       <span className="block text-[13px] text-slate-600 mt-1">
-                      
+                        {/* optional helper text */}
                       </span>
                     </span>
                   </label>
 
                   <p>
-                    By clicking submit below, you consent to allow Fathom Marine (Surveyor) to store and
-                    process the personal information submitted above to provide the content requested.
+                    By clicking submit below, you consent to allow Fathom Marine
+                    (Surveyor) to store and process the personal information
+                    submitted above to provide the content requested.
                   </p>
                 </div>
               </section>
-
-
 
               {/* Submit */}
               <div className="flex items-center justify-end pt-1">
@@ -1192,5 +1266,5 @@ const brand = "#213A6B" // change if you want slightly different
         <div className="h-6" />
       </div>
     </div>
-  )
+  );
 }
