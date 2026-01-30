@@ -203,55 +203,55 @@ export function useSurveyorForm() {
       }
     }
     if (formData.discipline === "other" && !formData.disciplineOther.trim())
-      errors.disciplineOther = "Please specify your discipline.";
+      e.disciplineOther = "Please specify your discipline.";
 
     if (formData.rank === "other" && !formData.rankOther.trim())
-      errors.rankOther = "Please specify your rank.";
+      e.rankOther = "Please specify your rank.";
 
     if (
       formData.qualifications.includes("Other") &&
       !formData.qualificationsOther.trim()
     )
-      errors.qualificationsOther = "Please specify your qualification.";
+      e.qualificationsOther = "Please specify your qualification.";
 
     if (
       formData.vesselTypes.includes("Other") &&
       !formData.vesselTypesOther.trim()
     )
-      errors.vesselTypesOther = "Please specify the vessel type.";
+      e.vesselTypesOther = "Please specify the vessel type.";
 
     if (
       formData.shoresideExperience.includes("Other") &&
       !formData.shoresideExperienceOther.trim()
     )
-      errors.shoresideExperienceOther = "Please specify shoreside experience.";
+      e.shoresideExperienceOther = "Please specify shoreside experience.";
 
     if (
       formData.surveyingExperience.includes("Other") &&
       !formData.surveyingExperienceOther.trim()
     )
-      errors.surveyingExperienceOther = "Please specify surveying experience.";
+      e.surveyingExperienceOther = "Please specify surveying experience.";
 
     if (
       formData.vesselTypeSurveyingExperience.includes("Other") &&
       !formData.vesselTypeSurveyingExperienceOther.trim()
     )
-      errors.vesselTypeSurveyingExperienceOther =
+      e.vesselTypeSurveyingExperienceOther =
         "Please specify vessel types surveyed.";
 
     if (
       formData.accreditations.includes("Other") &&
       !formData.accreditationsOther.trim()
     )
-      errors.accreditationsOther = "Please specify accreditation.";
+      e.accreditationsOther = "Please specify accreditation.";
 
     if (
       formData.coursesCompleted.includes("Other") &&
       !formData.coursesCompletedOther.trim()
     )
-      errors.coursesCompletedOther = "Please specify course.";
+      e.coursesCompletedOther = "Please specify course.";
 
-    return errors;
+    return e;
   }
 
   function clearError(key: string) {
