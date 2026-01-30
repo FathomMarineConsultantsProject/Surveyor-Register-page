@@ -533,7 +533,7 @@ export function useSurveyorForm() {
       if (formData.cvFile) payload.append("cvFile", formData.cvFile);
       if (formData.photoFile) payload.append("photoFile", formData.photoFile);
 
-      const res = await fetch("https://surveyor-form-backend.vercel.app//api/form/submit", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/form/submit`, {
         method: "POST",
         body: payload,
       });
