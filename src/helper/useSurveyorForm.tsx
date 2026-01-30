@@ -314,6 +314,7 @@ export function useSurveyorForm() {
         next.companyName = "";
       return next;
     });
+    console.log("FormData", formData)
 
     clearError(name);
     if (name === "employmentStatus") clearError("companyName");
@@ -529,7 +530,7 @@ export function useSurveyorForm() {
 
       payload.append("inspectionCost", formData.inspectionCost);
       payload.append("marketingConsent", String(formData.marketingConsent));
-
+      console.log("FormData", formData);
       if (formData.cvFile) payload.append("cvFile", formData.cvFile);
       if (formData.photoFile) payload.append("photoFile", formData.photoFile);
 
