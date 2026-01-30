@@ -109,9 +109,9 @@ export function useSurveyorForm() {
     req("stateRegion", "State/Region is required.");
     req("discipline", "Discipline is required.");
     req("rank", "Rank is required.");
-    req("qualifiedDD", "Qualified day is required.");
-    req("qualifiedMM", "Qualified month is required.");
-    req("qualifiedYYYY", "Qualified year is required.");
+    //req("qualifiedDD", "Qualified day is required.");
+    //req("qualifiedMM", "Qualified month is required.");
+    //req("qualifiedYYYY", "Qualified year is required.");
     req("inspectionCost", "Inspection cost is required.");
     // ✅ Name validation
     if (data.firstName.trim() && !nameRegex.test(data.firstName.trim())) {
