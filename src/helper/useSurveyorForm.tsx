@@ -533,13 +533,16 @@ export function useSurveyorForm() {
       if (formData.cvFile) payload.append("cvFile", formData.cvFile);
       if (formData.photoFile) payload.append("photoFile", formData.photoFile);
 
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/form/submit`, {
+      const baseUrl = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");
+      const res = await fetch(`${baseUrl}/api/form/submit`, {
         method: "POST",
         body: payload,
       });
 
       if (!res.ok) {
-        alert("Error submitting form. Please try again.");
+        const errText = await res.text(); // or res.json() if your backend returns json
+        console.error("Backend error:", errText);
+        alert(errText);
         return;
       }
 
